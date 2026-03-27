@@ -9,6 +9,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
     display: flex;
     justify-content: center;
+    padding: 4px 8px;
+    border-radius: 0 0 6px 6px;
 }
 
 .objectbanner-content {
