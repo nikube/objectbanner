@@ -1,0 +1,22 @@
+{
+  "schema_version": "1",
+  "module_id": "objectbanner",
+  "name": "Object Banner",
+  "description": "Floating navigation banner linking Proposal, Order, Invoice, and Shipment on document cards.",
+  "author": "Nicolas - AnatoleConseil.com",
+  "url": "https://anatoleconseil.com/",
+  "license": "GPL-3.0-or-later",
+  "dolibarr_module_id": 185154,
+  "repository": "nikube/objectbanner",
+  "compatibility": {
+    "0.x": {
+      "dolibarr_min": "16.0.0",
+      "dolibarr_max": "23.*",
+      "php_min": "7.1"
+    }
+  },
+  "dependencies": {
+    "modules": [],
+    "php_extensions": []
+  }
+}

@@ -1,0 +1,70 @@
+# Fichier de traduction pour le module ObjectBanner
+
+#
+# Générique
+#
+
+# Libellé du module
+Module185154Name = Object Banner
+ModuleObjectBannerName = Object Banner
+# Description du module
+Module185154Desc = Affiche une bannière flottante reliant Devis, Commande, Facture et Expédition sur les fiches documents
+ModuleObjectBannerDesc = Affiche une bannière flottante reliant Devis, Commande, Facture et Expédition sur les fiches documents
+
+#
+# Page d'administration
+#
+ObjectBannerSetup = Configuration Object Banner
+Settings = Paramètres
+ObjectBannerSetupPage = Ce module affiche automatiquement une bannière de navigation sur les fiches Devis, Commande, Facture et Expédition montrant leurs documents liés.
+
+#
+# Page À propos
+#
+About = À propos
+ObjectBannerAbout = À propos de Object Banner
+ObjectBannerAboutPage = À propos du module ObjectBanner
+
+#
+# Page de configuration
+#
+Parameter = Paramètre
+Value = Valeur
+ModuleVersion = Version du module
+ObjectBannerStatus = Statut du module
+ObjectBannerHooks = Hooks actifs
+Active = Actif
+ObjectBannerNoConfigNeeded = La bannière apparaîtra sur les fiches Devis, Commande, Facture et Expédition lorsque des documents liés existent. Utilisez les options ci-dessous pour personnaliser l'affichage.
+
+#
+# Page À propos - Contenu
+#
+AboutObjectBannerWhat = Qu'est-ce que Object Banner ?
+AboutObjectBannerWhatDesc = Object Banner est un module Dolibarr qui affiche une bannière de navigation flottante sur les fiches Devis, Commande et Facture. Elle montre la chaîne complète des documents liés, facilitant la navigation entre les documents associés.
+AboutObjectBannerIntegration = Intégration
+AboutObjectBannerIntegratedBy = Développé pour Dolibarr par
+AboutObjectBannerFeatures = Fonctionnalités
+AboutObjectBannerFeature1 = Affichage automatique sur les fiches Devis, Commande et Facture
+AboutObjectBannerFeature2 = Affiche la chaîne complète des documents (Devis > Commande > Facture)
+AboutObjectBannerFeature3 = Liens directs vers les documents associés
+AboutObjectBannerFeature4 = Design responsive pour les appareils mobiles
+AboutObjectBannerLicense = Licence
+AboutObjectBannerLicenseType = GPL v3+
+
+#
+# Options d'affichage
+#
+ObjectBannerDisplayOptions = Options d'affichage de la bannière
+ObjectBannerShowPropal = Afficher les Devis
+ObjectBannerShowCommande = Afficher les Commandes
+ObjectBannerShowFacture = Afficher les Factures
+ObjectBannerShowExpedition = Afficher les Expéditions
+
+#
+# Contenu de la bannière
+#
+Proposal = Devis
+Order = Commande
+Invoice = Facture
+Shipment = Expédition
+TTC = TTC

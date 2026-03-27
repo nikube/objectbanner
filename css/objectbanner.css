@@ -1,0 +1,101 @@
+.objectbanner-container {
+    position: sticky;
+    /* Top is set by JS dynamically */
+    top: 0;
+    z-index: 900;
+    /* Below Dolibarr top menu (usually 1000+) */
+    /* Lighten the menu color by overlaying a semi-transparent white layer */
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), var(--colorbackhmenu1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: center;
+}
+
+.objectbanner-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.objectbanner-title {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    color: #888;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.objectbanner-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.objectbanner-ref-row {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.objectbanner-ref {
+    font-weight: bold;
+    font-size: 1em;
+    line-height: 1.2;
+}
+
+.objectbanner-sep {
+    margin: 0 5px;
+    color: #ccc;
+}
+
+.objectbanner-status {
+    font-size: 0.85em;
+    color: #666;
+}
+
+.objectbanner-arrow {
+    margin: 0 10px;
+    color: #ccc;
+    font-size: 1em;
+}
+
+.objectbanner-empty {
+    color: #ccc;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+/* Count link styles */
+.objectbanner-count-link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.objectbanner-count-link:hover .objectbanner-count {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+.objectbanner-count {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .objectbanner-container {
+        flex-direction: column;
+        position: relative;
+        padding: 10px;
+        top: 0 !important;
+        /* Reset sticky offset on mobile if header behavior changes */
+    }
+
+    .objectbanner-arrow {
+        transform: rotate(90deg);
+        margin: 5px 0;
+    }
+}

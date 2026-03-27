@@ -1,0 +1,70 @@
+# Translation file for ObjectBanner module
+
+#
+# Generic
+#
+
+# Module label
+Module185154Name = Object Banner
+ModuleObjectBannerName = Object Banner
+# Module description
+Module185154Desc = Displays a floating banner linking Proposal, Order, Invoice, and Shipment on document cards
+ModuleObjectBannerDesc = Displays a floating banner linking Proposal, Order, Invoice, and Shipment on document cards
+
+#
+# Admin page
+#
+ObjectBannerSetup = Object Banner Setup
+Settings = Settings
+ObjectBannerSetupPage = This module automatically displays a navigation banner on Proposal, Order, Invoice, and Shipment cards showing their linked documents.
+
+#
+# About page
+#
+About = About
+ObjectBannerAbout = About Object Banner
+ObjectBannerAboutPage = About ObjectBanner module
+
+#
+# Setup page
+#
+Parameter = Parameter
+Value = Value
+ModuleVersion = Module Version
+ObjectBannerStatus = Module Status
+ObjectBannerHooks = Active Hooks
+Active = Active
+ObjectBannerNoConfigNeeded = The banner will appear on Proposal, Order, Invoice, and Shipment cards when linked documents exist. Use the options below to customize the display.
+
+#
+# About page content
+#
+AboutObjectBannerWhat = What is Object Banner?
+AboutObjectBannerWhatDesc = Object Banner is a Dolibarr module that displays a floating navigation banner on Proposal, Order, and Invoice cards. It shows the complete chain of linked documents, making it easy to navigate between related documents.
+AboutObjectBannerIntegration = Integration
+AboutObjectBannerIntegratedBy = Developed for Dolibarr by
+AboutObjectBannerFeatures = Features
+AboutObjectBannerFeature1 = Automatic display on Proposal, Order, and Invoice cards
+AboutObjectBannerFeature2 = Shows complete document chain (Proposal > Order > Invoice)
+AboutObjectBannerFeature3 = Direct links to related documents
+AboutObjectBannerFeature4 = Responsive design for mobile devices
+AboutObjectBannerLicense = License
+AboutObjectBannerLicenseType = GPL v3+
+
+#
+# Display options
+#
+ObjectBannerDisplayOptions = Banner Display Options
+ObjectBannerShowPropal = Show Proposals
+ObjectBannerShowCommande = Show Orders
+ObjectBannerShowFacture = Show Invoices
+ObjectBannerShowExpedition = Show Shipments
+
+#
+# Banner content
+#
+Proposal = Proposal
+Order = Order
+Invoice = Invoice
+Shipment = Shipment
+TTC = Inc. Tax
