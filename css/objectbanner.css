@@ -13,6 +13,24 @@
     border-radius: 0 0 6px 6px;
 }
 
+.objectbanner-item {
+    padding: 4px 10px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+/* Highlight the section matching the card we are currently on */
+.objectbanner-item.active {
+    border-color: var(--colorbackhmenu1, #2b3e50);
+    background: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05) inset;
+}
+
+.objectbanner-item.active .objectbanner-title {
+    color: var(--colorbackhmenu1, #2b3e50);
+}
+
 .objectbanner-content {
     display: flex;
     flex-direction: column;

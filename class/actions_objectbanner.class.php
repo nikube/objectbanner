@@ -11,6 +11,9 @@ class ActionsObjectBanner
             in_array('expeditioncard', explode(':', $parameters['context']))) {
 
             $langs->load("objectbanner@objectbanner");
+            // Load language files of every object type in the chain so getLibStatut()
+            // resolves labels consistently whatever the current card we are on.
+            $langs->loadLangs(array("propal", "orders", "bills", "sendings"));
 
             // Fetch linked objects
             $object->fetchObjectLinked();
