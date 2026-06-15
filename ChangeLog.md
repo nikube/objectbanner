@@ -1,5 +1,9 @@
 # CHANGELOG MODULE OBJECTBANNER FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
 
+## 0.5
+
+- Fix: the banner was displayed twice on shipment (expedition) cards. Dolibarr's `expedition/card.php` executes the `formObjectOptions` hook more than once per page, so the banner rendered for each fire. A per-request guard now ensures the banner is rendered at most once, whatever the card.
+
 ## 0.4
 
 - Fix: object status labels were sometimes shown as raw translation keys (e.g. `StatusOrderDeliveredShort`) depending on the current card. Now loads the language files of all chained objects (propal, orders, bills, sendings) so statuses are always resolved consistently.

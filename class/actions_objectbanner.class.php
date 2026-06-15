@@ -1,9 +1,22 @@
 <?php
 class ActionsObjectBanner
 {
+    /**
+     * Guard flag: the formObjectOptions hook is executed more than once on some
+     * cards (notably expedition/card.php calls it twice), which previously made
+     * the banner render twice on the shipping page. Render it only on first call.
+     *
+     * @var bool
+     */
+    private static $bannerRendered = false;
+
     public function formObjectOptions($parameters, &$object, &$action, $hookmanager)
     {
         global $conf, $langs, $db;
+
+        if (self::$bannerRendered) {
+            return 0;
+        }
 
         if (in_array('propalcard', explode(':', $parameters['context'])) ||
             in_array('ordercard', explode(':', $parameters['context'])) ||
@@ -131,6 +144,10 @@ class ActionsObjectBanner
 
         // Don't show banner if no sections are enabled
         if (empty($visibleSections)) return;
+
+        // Mark as rendered so a second hook fire on the same page (expedition
+        // card runs formObjectOptions twice) does not duplicate the banner.
+        self::$bannerRendered = true;
 
         print '<div id="objectbanner-container" class="objectbanner-container">';
 
