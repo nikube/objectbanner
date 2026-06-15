@@ -26,14 +26,14 @@ class ActionsObjectBanner
             if ($object->element == 'propal') $propals[$object->id] = $object;
             elseif ($object->element == 'commande') $orders[$object->id] = $object;
             elseif ($object->element == 'facture') $invoices[$object->id] = $object;
-            elseif ($object->element == 'expedition') $expeditions[$object->id] = $object;
+            elseif ($object->element == 'shipping') $expeditions[$object->id] = $object;
 
             // Helper to classify objects
             $classify = function($obj) use (&$propals, &$orders, &$invoices, &$expeditions) {
                 if ($obj->element == 'propal') $propals[$obj->id] = $obj;
                 elseif ($obj->element == 'commande') $orders[$obj->id] = $obj;
                 elseif ($obj->element == 'facture') $invoices[$obj->id] = $obj;
-                elseif ($obj->element == 'expedition') $expeditions[$obj->id] = $obj;
+                elseif ($obj->element == 'shipping') $expeditions[$obj->id] = $obj;
             };
 
             // Check linked objects of current object
@@ -137,7 +137,7 @@ class ActionsObjectBanner
             if ($elementType == 'propal') $sectionType = 'propal';
             if ($elementType == 'commande') $sectionType = 'commande';
             if ($elementType == 'facture') $sectionType = 'facture';
-            if ($elementType == 'expedition') $sectionType = 'expedition';
+            if ($elementType == 'shipping') $sectionType = 'shipping';
 
             $isActive = ($currentObj->element == $sectionType);
             $count = count($objects);
@@ -207,7 +207,7 @@ class ActionsObjectBanner
 
         // Expedition Section
         if ($showExpedition) {
-            $renderSection($langs->trans("Shipment"), $expeditions, $currentObject, 'expedition');
+            $renderSection($langs->trans("Shipment"), $expeditions, $currentObject, 'shipping');
             $sectionsRendered++;
         }
 
