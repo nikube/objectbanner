@@ -2,19 +2,26 @@
 class ActionsObjectBanner
 {
     /**
-     * Guard flag: the formObjectOptions hook is executed more than once on some
+     * Guard set: the formObjectOptions hook is executed more than once on some
      * cards (notably expedition/card.php calls it twice), which previously made
-     * the banner render twice on the shipping page. Render it only on first call.
+     * the banner render twice on the shipping page. We deduplicate PER OBJECT
+     * (keyed by element+id) so the banner renders only once for a given card,
+     * without blocking rendering for other objects/contexts of the same request.
      *
-     * @var bool
+     * @var array<string,bool>
      */
-    private static $bannerRendered = false;
+    private static $renderedBanners = array();
 
     public function formObjectOptions($parameters, &$object, &$action, $hookmanager)
     {
         global $conf, $langs, $db;
 
-        if (self::$bannerRendered) {
+        // Per-object dedup key (element + id). Fall back to a generic key when
+        // the object is not identifiable so we still avoid a hard duplicate.
+        $bannerKey = (isset($object->element) ? $object->element : 'unknown')
+            . '_' . (isset($object->id) ? $object->id : '0');
+
+        if (!empty(self::$renderedBanners[$bannerKey])) {
             return 0;
         }
 
@@ -112,13 +119,13 @@ class ActionsObjectBanner
             }
 
             // Now render the banner
-            $this->printBanner($propals, $orders, $invoices, $expeditions, $object);
+            $this->printBanner($propals, $orders, $invoices, $expeditions, $object, $bannerKey);
         }
 
         return 0;
     }
 
-    private function printBanner($propals, $orders, $invoices, $expeditions, $currentObject)
+    private function printBanner($propals, $orders, $invoices, $expeditions, $currentObject, $bannerKey = '')
     {
         global $langs, $conf;
 
@@ -145,14 +152,17 @@ class ActionsObjectBanner
         // Don't show banner if no sections are enabled
         if (empty($visibleSections)) return;
 
-        // Mark as rendered so a second hook fire on the same page (expedition
-        // card runs formObjectOptions twice) does not duplicate the banner.
-        self::$bannerRendered = true;
+        // Mark this specific object (element+id) as rendered so a second hook
+        // fire on the same card (expedition card runs formObjectOptions twice)
+        // does not duplicate the banner, while other objects stay unaffected.
+        if ($bannerKey !== '') {
+            self::$renderedBanners[$bannerKey] = true;
+        }
 
         print '<div id="objectbanner-container" class="objectbanner-container">';
 
         // Helper function to render a section
-        $renderSection = function($title, $objects, $currentObj, $elementType) use ($langs, $maxItems) {
+        $renderSection = function($title, $titlePlural, $objects, $currentObj, $elementType) use ($langs, $maxItems) {
             $sectionType = '';
             if ($elementType == 'propal') $sectionType = 'propal';
             if ($elementType == 'commande') $sectionType = 'commande';
@@ -172,7 +182,10 @@ class ActionsObjectBanner
                 // Show count with link to scroll to linked objects table
                 print '<div class="objectbanner-items-container">';
                 print '<a href="#" class="objectbanner-count-link" data-element="' . $elementType . '" onclick="objectbannerScrollToLinked(\'' . $elementType . '\'); return false;">';
-                print '<span class="objectbanner-count badge badge-info">' . $count . ' ' . $title . ($count > 1 ? 's' : '') . '</span>';
+                // Use the properly translated plural label (or singular when a
+                // single item) instead of gluing an English "s" onto a
+                // translated word (which produced e.g. "3 Deviss" in French).
+                print '<span class="objectbanner-count badge badge-info">' . $count . ' ' . ($count > 1 ? $titlePlural : $title) . '</span>';
                 print '</a>';
                 print '</div>';
             } else {
@@ -194,7 +207,7 @@ class ActionsObjectBanner
 
         // Propal Section
         if ($showPropal) {
-            $renderSection($langs->trans("Proposal"), $propals, $currentObject, 'propal');
+            $renderSection($langs->trans("Proposal"), $langs->trans("Proposals"), $propals, $currentObject, 'propal');
             $sectionsRendered++;
         }
 
@@ -205,7 +218,7 @@ class ActionsObjectBanner
 
         // Order Section
         if ($showCommande) {
-            $renderSection($langs->trans("Order"), $orders, $currentObject, 'commande');
+            $renderSection($langs->trans("Order"), $langs->trans("Orders"), $orders, $currentObject, 'commande');
             $sectionsRendered++;
         }
 
@@ -216,7 +229,7 @@ class ActionsObjectBanner
 
         // Invoice Section
         if ($showFacture) {
-            $renderSection($langs->trans("Invoice"), $invoices, $currentObject, 'facture');
+            $renderSection($langs->trans("Invoice"), $langs->trans("Invoices"), $invoices, $currentObject, 'facture');
             $sectionsRendered++;
         }
 
@@ -227,7 +240,7 @@ class ActionsObjectBanner
 
         // Expedition Section
         if ($showExpedition) {
-            $renderSection($langs->trans("Shipment"), $expeditions, $currentObject, 'shipping');
+            $renderSection($langs->trans("Shipment"), $langs->trans("Shipments"), $expeditions, $currentObject, 'shipping');
             $sectionsRendered++;
         }
 

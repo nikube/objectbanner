@@ -58,6 +58,7 @@ if (!$res) {
 // Libraries
 require_once DOL_DOCUMENT_ROOT."/core/lib/admin.lib.php";
 require_once '../lib/objectbanner.lib.php';
+require_once '../core/modules/modObjectBanner.class.php';
 
 /**
  * @var Conf $conf
@@ -126,6 +127,9 @@ include DOL_DOCUMENT_ROOT.'/core/actions_setmoduleoptions.inc.php';
 
 $form = new Form($db);
 
+// Instantiate module descriptor to expose dynamic module version
+$moduleObj = new modObjectBanner($db);
+
 $help_url = '';
 $title = "ObjectBannerSetup";
 
@@ -155,7 +159,7 @@ print '</tr>';
 // Module version
 print '<tr class="oddeven">';
 print '<td>'.$langs->trans("ModuleVersion").'</td>';
-print '<td>0.1</td>';
+print '<td>'.dol_escape_htmltag($moduleObj->version).'</td>';
 print '</tr>';
 
 // Module status info
